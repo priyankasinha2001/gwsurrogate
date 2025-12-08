@@ -1102,14 +1102,14 @@ Returns:
                 # in which case we use the full surrogate length
                 if t0 is None:
                     t0 = self.t_coorb[0]
-                tf = self.t_coorb[-1]
-                num_times = int(np.ceil((tf - t0)/dtM))
-                timesM = t0 + dtM*np.arange(num_times)
+                #tf = self.t_coorb[-1]
+                #num_times = int(np.ceil((tf - t0)/dtM))
+                #timesM = t0 + dtM*np.arange(num_times)
 
 
         if do_interp:
-            hre = splinterp_many(timesM, self.t_coorb, np.real(h_inertial))
-            him = splinterp_many(timesM, self.t_coorb, np.imag(h_inertial))
+            hre = splinterp_many([t0], self.t_coorb, np.real(h_inertial))
+            him = splinterp_many([t0], self.t_coorb, np.imag(h_inertial))
             h_inertial = hre + 1.j*him
 
         # Make mode dict
@@ -1117,7 +1117,7 @@ Returns:
         i=0
         for ell in range(2, ellMax+1):
             for m in range(-ell, ell+1):
-                h[(ell, m)] = h_inertial[i]
+                h[(ell, m)] = h_inertial[i][0]
                 i += 1
 
         #  Transform and interpolate spins if needed
@@ -1126,12 +1126,12 @@ Returns:
             if do_interp:
                 ## Interpolate from self.tds to timesM because that is what
                 ## is done in the LAL code.
-                chiA_copr = splinterp_many(timesM, self.tds, chiA_copr_dyn.T).T
-                chiB_copr = splinterp_many(timesM, self.tds, chiB_copr_dyn.T).T
+                chiA_copr = splinterp_many([t0], self.tds, chiA_copr_dyn.T).T
+                chiB_copr = splinterp_many([t0], self.tds, chiB_copr_dyn.T).T
                 chiA_copr = normalize_spin(chiA_copr, chiA_norm)
                 chiB_copr = normalize_spin(chiB_copr, chiB_norm)
-                orbphase = _splinterp_Cwrapper(timesM, self.tds, orbphase_dyn)
-                quat = splinterp_many(timesM, self.tds, quat_dyn)
+                orbphase = _splinterp_Cwrapper([t0], self.tds, orbphase_dyn)
+                quat = splinterp_many([t0], self.tds, quat_dyn)
                 quat = quat/np.sqrt(np.sum(abs(quat)**2, 0))
 
             chiA_inertial = transformTimeDependentVector(quat, chiA_copr.T).T
@@ -1148,7 +1148,7 @@ Returns:
         else:
             dynamics = None
 
-        return timesM, h, dynamics
+        return t0, h, dynamics
 
 class PrecessingSurrogateMultiDomain(object):
     """
