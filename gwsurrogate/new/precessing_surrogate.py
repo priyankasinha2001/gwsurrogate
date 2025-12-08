@@ -1108,8 +1108,8 @@ Returns:
 
 
         if do_interp:
-            hre = splinterp_many([t0], self.t_coorb, np.real(h_inertial))
-            him = splinterp_many([t0], self.t_coorb, np.imag(h_inertial))
+            hre = splinterp_many(np.array([t0]), self.t_coorb, np.real(h_inertial))
+            him = splinterp_many(np.array([t0]), self.t_coorb, np.imag(h_inertial))
             h_inertial = hre + 1.j*him
 
         # Make mode dict
@@ -1126,12 +1126,12 @@ Returns:
             if do_interp:
                 ## Interpolate from self.tds to timesM because that is what
                 ## is done in the LAL code.
-                chiA_copr = splinterp_many([t0], self.tds, chiA_copr_dyn.T).T
-                chiB_copr = splinterp_many([t0], self.tds, chiB_copr_dyn.T).T
+                chiA_copr = splinterp_many(np.array([t0]), self.tds, chiA_copr_dyn.T).T
+                chiB_copr = splinterp_many(np.array([t0]), self.tds, chiB_copr_dyn.T).T
                 chiA_copr = normalize_spin(chiA_copr, chiA_norm)
                 chiB_copr = normalize_spin(chiB_copr, chiB_norm)
-                orbphase = _splinterp_Cwrapper([t0], self.tds, orbphase_dyn)
-                quat = splinterp_many([t0], self.tds, quat_dyn)
+                orbphase = _splinterp_Cwrapper(np.array([t0]), self.tds, orbphase_dyn)
+                quat = splinterp_many(np.array([t0]), self.tds, quat_dyn)
                 quat = quat/np.sqrt(np.sum(abs(quat)**2, 0))
 
             chiA_inertial = transformTimeDependentVector(quat, chiA_copr.T).T
