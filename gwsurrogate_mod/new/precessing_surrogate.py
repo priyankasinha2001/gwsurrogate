@@ -1115,12 +1115,11 @@ Returns:
 	    
      
         # Make mode dict
-	#h_inertial= np.array([h_inertial[0]], dtype=complex)
         h = {}
         i=0
         for ell in range(2, ellMax+1):
             for m in range(-ell, ell+1):
-                h[(ell, m)] = np.array([h_inertial[0]], dtype=complex)[i][0]
+                h[(ell, m)] = h_inertal[i,0]
                 i += 1
 
         #  Transform and interpolate spins if needed
