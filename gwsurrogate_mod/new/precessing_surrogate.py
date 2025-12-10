@@ -1114,8 +1114,8 @@ Returns:
 	    
            
 	
-	h_inertial= np.array([h_inertial[0]], dtype=complex)
         # Make mode dict
+	h_inertial= np.array([h_inertial[0]], dtype=complex)
         h = {}
         i=0
         for ell in range(2, ellMax+1):
