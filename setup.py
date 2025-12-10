@@ -19,20 +19,20 @@ else:
     LibDirs = []
 
 extmod = Extension(
-    "gwsurrogate.spline_interp_Cwrapper._spline_interp",
+    "gwsurrogate_mod.spline_interp_Cwrapper._spline_interp",
     include_dirs=IncDirs,
     libraries=["gsl"],
     extra_compile_args=["-std=c99"],
     library_dirs=LibDirs,
-    sources=["gwsurrogate/spline_interp_Cwrapper/_spline_interp.c"],
+    sources=["gwsurrogate_mod/spline_interp_Cwrapper/_spline_interp.c"],
 )
 extmods.append(extmod)
 
 # build extension 2: precessing utils
 extmod = Extension(
-    "gwsurrogate.precessing_utils._utils",
-    sources=["gwsurrogate/precessing_utils/src/precessing_utils.c"],
-    include_dirs=["gwsurrogate/precessing_utils/include", numpy.get_include()],
+    "gwsurrogate_mod.precessing_utils._utils",
+    sources=["gwsurrogate_mod/precessing_utils/src/precessing_utils.c"],
+    include_dirs=["gwsurrogate_mod/precessing_utils/include", numpy.get_include()],
     language="c",
     extra_compile_args=["-std=c99", "-fPIC", "-O3", '-Wcpp'],
 )
@@ -41,7 +41,7 @@ extmods.append(extmod)
 
 # Extract code version from surrogate.py
 def read_main_file(key):
-    with open("gwsurrogate/surrogate.py") as f:
+    with open("gwsurrogate_mod/surrogate.py") as f:
         for line in f.readlines():
             if key in line:
                 return line.split('"')[1]
@@ -50,23 +50,23 @@ def read_main_file(key):
 # define models to be used within pycbc
 entries = {
     "pycbc.waveform.td": [
-        "GWS-NRHybSur3dq8 = gwsurrogate.pycbc:gws_td_gen",
-        "GWS-NRSur7dq4 = gwsurrogate.pycbc:gws_td_gen",
-        "GWS-NRHybSur3dq8Tidal = gwsurrogate.pycbc:gws_td_gen",
+        "GWS-NRHybSur3dq8 = gwsurrogate_mod.pycbc:gws_td_gen",
+        "GWS-NRSur7dq4 = gwsurrogate_mod.pycbc:gws_td_gen",
+        "GWS-NRHybSur3dq8Tidal = gwsurrogate_mod.pycbc:gws_td_gen",
     ]
 }
 
 setup(
-    name="gwsurrogate",
+    name="gwsurrogate_mod",
     version=read_main_file("__version__"),
     author=read_main_file("__author__"),
     author_email="sfield@umassd.edu",
     packages=[
-        "gwsurrogate",
-        "gwsurrogate.eval_pysur",
-        "gwsurrogate.new",
-        # "gwsurrogate.precessing_utils",
-        "gwsurrogate.spline_interp_Cwrapper",
+        "gwsurrogate_mod",
+        "gwsurrogate_mod.eval_pysur",
+        "gwsurrogate_mod.new",
+        # "gwsurrogate_mod.precessing_utils",
+        "gwsurrogate_mod.spline_interp_Cwrapper",
     ],
     license="MIT",
     include_package_data=True,
