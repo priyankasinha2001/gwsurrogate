@@ -1137,15 +1137,15 @@ Returns:
               # quat = quat/np.sqrt(np.sum(abs(quat)**2, 0))
 		
 	    
-            chiA_inertial = transformTimeDependentVector(quat[:,0], chiA_copr[:,0].T).T
-            chiB_inertial = transformTimeDependentVector(quat[:,0], chiB_copr[:,0].T).T
+            chiA_inertial = transformTimeDependentVector(quat[:,0:1], chiA_copr[0:1,:].T).T
+            chiB_inertial = transformTimeDependentVector(quat[:,0:1], chiB_copr[0:1,:].T).T
 
             dynamics = {
                 'chiA': chiA_inertial,
                 'chiB': chiB_inertial,
-                'chiA_copr': chiA_copr,
-                'chiB_copr': chiB_copr,
-                'q_copr': quat,
+                'chiA_copr': chiA_copr[0:1,:],
+                'chiB_copr': chiB_copr[0:1,:],
+                'q_copr': quat[:,0:1],
                 'orbphase': orbphase,
                 }
         else:
