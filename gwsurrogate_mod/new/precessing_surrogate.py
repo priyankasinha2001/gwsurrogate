@@ -1107,13 +1107,13 @@ Returns:
                 #timesM = t0 + dtM*np.arange(num_times)
 
 
+
         #if do_interp:
         #   hre = splinterp_many(np.array([t0]), self.t_coorb, np.real(h_inertial))
         #   him = splinterp_many(np.array([t0]), self.t_coorb, np.imag(h_inertial))
         #    h_inertial = hre + 1.j*him
 	    
-           
-	
+     
         # Make mode dict
 	h_inertial= np.array([h_inertial[0]], dtype=complex)
         h = {}
