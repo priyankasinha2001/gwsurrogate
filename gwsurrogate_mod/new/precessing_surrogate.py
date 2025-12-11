@@ -1096,7 +1096,7 @@ Returns:
                 timesM = timesM[timesM >= t0]
         else:
             ## Interpolate onto uniform domain if needed
-            do_interp = False
+            do_interp = True
             if dtM is not None:
                 # If omega_low=0 or None, t0 would have been set to None,
                 # in which case we use the full surrogate length
@@ -1108,10 +1108,10 @@ Returns:
 
 
 
-        #if do_interp:
-        #   hre = splinterp_many(np.array([t0]), self.t_coorb, np.real(h_inertial))
-        #   him = splinterp_many(np.array([t0]), self.t_coorb, np.imag(h_inertial))
-        #    h_inertial = hre + 1.j*him
+        if do_interp:
+            hre = splinterp_many(np.array([t0]), self.t_coorb, np.real(h_inertial))
+            him = splinterp_many(np.array([t0]), self.t_coorb, np.imag(h_inertial))
+            h_inertial = hre + 1.j*him
 	    
      
         # Make mode dict
@@ -1119,7 +1119,7 @@ Returns:
         i=0
         for ell in range(2, ellMax+1):
             for m in range(-ell, ell+1):
-                h[(ell, m)] = h_inertial[i,0]
+                h[(ell, m)] = h_inertial[i]
                 i += 1
 
         #  Transform and interpolate spins if needed
