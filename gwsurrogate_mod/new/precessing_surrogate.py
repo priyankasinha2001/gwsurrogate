@@ -1146,7 +1146,7 @@ Returns:
                 'chiA_copr': chiA_copr[0:1,:],
                 'chiB_copr': chiB_copr[0:1,:],
                 'q_copr': quat[:,0:1],
-                'orbphase': orbphase,
+                'orbphase': orbphase[0],
                 }
         else:
             dynamics = None
