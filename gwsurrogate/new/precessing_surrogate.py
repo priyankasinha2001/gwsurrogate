@@ -899,8 +899,8 @@ omega_ref_max_model: The maximium allowable reference dimensionless
         self.tds = np.append(self.dynamics_sur.t[0:6:2], \
             self.dynamics_sur.t[6:])
 
-        self.t_0 = self.t_coorb[0]
-        self.t_f = self.t_coorb[-1]
+        #self.t_0 = self.t_coorb[0]
+        #self.t_f = self.t_coorb[-1]
 
         self.mode_list = self.coorb_sur.mode_list
 
