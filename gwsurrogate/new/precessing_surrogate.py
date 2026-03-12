@@ -807,7 +807,7 @@ ellMax: The maximum ell mode to evaluate.
                 'bfOrders': orders,
                 'coefs': coefs,
                 }
-            x = np.append(q, np.append(chiA[ni], chiB[ni]))
+            x = np.append(q, np.append(chiA, chiB))
             fit_params = self._get_fit_params(x)
             nodes.append(_eval_scalar_fit(fit_data, fit_params, self._get_fit_settings))
 
