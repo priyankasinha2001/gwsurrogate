@@ -895,7 +895,7 @@ omega_ref_max_model: The maximium allowable reference dimensionless
         self.omega_ref_max_model = omega_ref_max_model
         self.dynamics_sur = DynamicsSurrogate(h5file,get_fit_params,get_fit_settings,omega_ref_max_model)
         self.coorb_sur = CoorbitalWaveformSurrogate(h5file,get_fit_params,get_fit_settings)
-        self.t_coorb = self.coorb_sur.t[0]
+        self.t_coorb = [self.coorb_sur.t[0]]
         self.tds = np.append(self.dynamics_sur.t[0:6:2], \
             self.dynamics_sur.t[6:])
 
