@@ -1076,8 +1076,8 @@ Returns:
         # Transform the sparsely sampled waveform
         h_inertial = inertial_waveform_modes(self.t_coorb, orbphase, quat,
                 h_coorb)
-	h_inertial = h_inertial[:, 0:1]
-
+	h_inertial = h_inertial[:,0:1]
+	
         if timesM is not None:
             if timesM[-1] > self.t_coorb[-1] + 0.01:
                 raise Exception("'times' includes times larger than the"
