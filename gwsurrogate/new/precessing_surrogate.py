@@ -1092,9 +1092,9 @@ Returns:
             # reference, so we do a deep copy so as to not overwrite
             # self.t_coorb.
             timesM = np.copy(self.t_coorb)
-            if t0 is not None:
+            #if t0 is not None:
                 # Truncate timesM if necessary
-                timesM = timesM[timesM >= t0]
+                #timesM = timesM[timesM >= t0]
         else:
             ## Interpolate onto uniform domain if needed
             do_interp = True
