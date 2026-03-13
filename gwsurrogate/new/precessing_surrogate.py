@@ -1097,7 +1097,7 @@ Returns:
                 #timesM = timesM[timesM >= t0]
         else:
             ## Interpolate onto uniform domain if needed
-            do_interp = True
+            do_interp = False
             if dtM is not None:
                 # If omega_low=0 or None, t0 would have been set to None,
                 # in which case we use the full surrogate length
