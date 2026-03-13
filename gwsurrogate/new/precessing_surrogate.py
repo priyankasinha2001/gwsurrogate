@@ -1057,13 +1057,13 @@ Returns:
         # Interpolate to the coorbital time grid, and transform to coorb frame.
         # Interpolate first since coorbital spins oscillate faster than
         # coprecessing spins
-        chiA_copr = splinterp_many(np.array([self.t_coorb[0]]), self.tds, chiA_copr_dyn.T).T
-        chiB_copr = splinterp_many(np.array([self.t_coorb[0]]), self.tds, chiB_copr_dyn.T).T
+        chiA_copr = splinterp_many(self.t_coorb, self.tds, chiA_copr_dyn.T).T
+        chiB_copr = splinterp_many(self.t_coorb, self.tds, chiB_copr_dyn.T).T
         chiA_copr = normalize_spin(chiA_copr, chiA_norm)
         chiB_copr = normalize_spin(chiB_copr, chiB_norm)
-        orbphase = _splinterp_Cwrapper(np.array([self.t_coorb[0]]), self.tds, orbphase_dyn)
+        orbphase = _splinterp_Cwrapper(self.t_coorb, self.tds, orbphase_dyn)
 
-        quat = splinterp_many(np.array([self.t_coorb[0]]), self.tds, quat_dyn)
+        quat = splinterp_many(self.t_coorb, self.tds, quat_dyn)
         quat = quat/np.sqrt(np.sum(abs(quat)**2, 0))
         chiA_coorb, chiB_coorb = coorb_spins_from_copr_spins(
                 chiA_copr, chiB_copr, orbphase)
@@ -1072,11 +1072,11 @@ Returns:
         # Evaluate coorbital waveform surrogate
         h_coorb = self.coorb_sur(q, chiA_coorb, chiB_coorb, \
                 ellMax=ellMax)
-        h_coorb = h_coorb[:, 0:1]
 	
         # Transform the sparsely sampled waveform
-        h_inertial = inertial_waveform_modes(np.array([self.t_coorb[0]]), orbphase, quat,
+        h_inertial = inertial_waveform_modes(self.t_coorb, orbphase, quat,
                 h_coorb)
+	h_inertial = h_inertial[:, 0:1]
 
         if timesM is not None:
             if timesM[-1] > self.t_coorb[-1] + 0.01:
