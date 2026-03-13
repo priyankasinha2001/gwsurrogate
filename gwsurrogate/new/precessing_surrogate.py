@@ -1072,7 +1072,7 @@ Returns:
         # Evaluate coorbital waveform surrogate
         h_coorb = self.coorb_sur(q, chiA_coorb, chiB_coorb, \
                 ellMax=ellMax)
-        h_coorb = {key: arr[0] for key, arr in h_coorb.items()}
+        h_coorb = h_coorb[:, 0:1]
 	
         # Transform the sparsely sampled waveform
         h_inertial = inertial_waveform_modes(self.t_coorb, orbphase, quat,
