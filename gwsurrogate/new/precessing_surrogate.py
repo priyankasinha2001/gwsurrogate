@@ -1103,8 +1103,8 @@ Returns:
                 if t0 is None:
                     t0 = self.t_coorb[0]
                 tf = self.t_coorb[-1]
-                num_times = int(np.ceil((tf - t0)/dtM))
-                timesM = t0 + dtM*np.arange(num_times)
+                num_times = int(np.ceil((tf - t0)/dtM))  # for the purpose of generating nrsur7dq4 at only  the first time index, we will keep dt very high so that (tf-t0)/dt<1, and ceil(tf-t0/dt)=1 
+                timesM = t0 + dtM*np.arange(num_times) # then np.arange(1) will be [0], so essentially we will have timesM = t0
 
 
         if do_interp:
